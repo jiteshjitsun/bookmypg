@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1b16492af20d8214e799ddac027fc6695e676c973828967a1cda9cebe6200e13"
+            "sha256": "73a2395a91d0692f162ed5986162b54b550224521b42c8afa59623b79899ed0e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -32,6 +32,14 @@
             ],
             "index": "pypi",
             "version": "==4.1.3"
+        },
+        "django-countries": {
+            "hashes": [
+                "sha256:2eadbe91578fe7b5a0c7782c07487b2ceb4bde9bc5c76eb43458929969f25c62",
+                "sha256:9d553531de8eaf384fec7fdd5867f3cb9b922d384984c3e613b6b29031e5c3c2"
+            ],
+            "index": "pypi",
+            "version": "==7.4.2"
         },
         "pillow": {
             "hashes": [
@@ -107,6 +115,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "typing-extensions": {
+            "hashes": [
+                "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa",
+                "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==4.4.0"
         },
         "tzdata": {
             "hashes": [
