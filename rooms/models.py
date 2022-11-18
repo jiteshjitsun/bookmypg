@@ -50,6 +50,8 @@ class Room(core_models.TimeStampedModel):
     persons = models.IntegerField()
     beds = models.IntegerField(default=0)
     baths = models.IntegerField(default=0)
+    check_in = models.TimeField()
+    check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     owner = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)

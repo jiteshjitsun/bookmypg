@@ -12,9 +12,33 @@ class ItemAdmin(admin.ModelAdmin):
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):  
     """ room admin defination """
-    pass
+    list_display = (
+        "name",
+        # "description",
+        "country",
+        "city",
+        "price",
+        "persons",
+        "beds",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+    )
 
-#photo admin registered here 
+    list_filter = (
+        "city",
+        "room_type",
+        "instant_book",
+    )
+
+    search_fields = (
+        "^city",
+        "^owner__username",
+    )
+
+#photo admin registered here
+
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
     """ photo admin definition """
