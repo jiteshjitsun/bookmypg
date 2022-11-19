@@ -22,7 +22,20 @@ class CustomerUserAdmin(UserAdmin):
         ),
     )
 
-    # list_display = ("username", "email", "gender", "language", "superhost")
+    list_filter = UserAdmin.list_filter + (
+        "superhost",
+    )
+
+    list_display = (
+        "username",
+        "email",
+        "gender", 
+        "language", 
+        "is_active",
+        "superhost",
+        "is_staff",
+        "is_superuser",
+    )
     # list_filter = ("superhost",)
 
 # admin.site.register(models.User, CustomerUserAdmin)  //same as above 
