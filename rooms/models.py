@@ -51,6 +51,7 @@ class Room(core_models.TimeStampedModel):
     room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
     amenities = models.ManyToManyField(Amenity)
     house_rules = models.ManyToManyField(HouseRule)
+    facilities = models.ManyToManyField(Facility)
     
 
     def __str__(self):
