@@ -2,6 +2,7 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
+<<<<<<< HEAD
 #Item admin reistered here
 @admin.register( models.RoomType, models.Facility, models.Amenity, models.HouseRule)
 class ItemAdmin(admin.ModelAdmin):
@@ -16,9 +17,16 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.rooms.count()
         # pass
     
+=======
+@admin.register(models.RoomType, models.Facility, models.Amenity, models.HouseRule)
+class ItemAdmin(admin.ModelAdmin): 
+    """ Item Admin definition """
+    pass
+>>>>>>> 1a26041 (aahh error finally removed)
 
 #Room admin registered here
 @admin.register(models.Room)
+<<<<<<< HEAD
 class RoomAdmin(admin.ModelAdmin):
     """ room admin defination """
 
@@ -111,3 +119,13 @@ class RoomAdmin(admin.ModelAdmin):
 class PhotoAdmin(admin.ModelAdmin):
     """ photo admin definition """
     pass
+=======
+class RoomAdmin(admin.ModelAdmin):  
+    """ Room Admin Definition """
+    pass
+
+@admin.register(models.Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    """ """
+    pass
+>>>>>>> 1a26041 (aahh error finally removed)
