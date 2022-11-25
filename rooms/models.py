@@ -47,11 +47,11 @@ class Room(core_models.TimeStampedModel):
     check_in = models.TimeField()
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
-    owner = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
-    amenities = models.ManyToManyField(Amenity)
-    house_rules = models.ManyToManyField(HouseRule)
-    facilities = models.ManyToManyField(Facility)
+    owner = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    room_type = models.ForeignKey("RoomType", on_delete=models.SET_NULL, null=True)
+    amenities = models.ManyToManyField("Amenity")
+    house_rules = models.ManyToManyField("HouseRule")
+    facilities = models.ManyToManyField("Facility")
     
 
     def __str__(self):
@@ -65,14 +65,16 @@ class Room(core_models.TimeStampedModel):
         total_sum = sum(all_rating)
         length_of_list = len(all_rating)
 
-        return round(total_sum/length_of_list, 2)
+        if length_of_list!=0:
+            return round(total_sum/length_of_list, 2)
+        return 0
     
 
 class Photo(core_models.TimeStampedModel):
     """ phot model definition """
     caption = models.CharField(max_length=70)
     file = models.ImageField()
-    room = models.ForeignKey(Room,
+    room = models.ForeignKey("Room",
         related_name="photos",
         on_delete=models.CASCADE)
 

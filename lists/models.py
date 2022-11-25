@@ -11,4 +11,4 @@ class List(core_models.TimeStampedModel):
     rooms = models.ManyToManyField("rooms.Room", blank=True)
 
     def __str__(self):
-        return self.name 
+        return self.name

@@ -27,7 +27,7 @@ class RoomAdmin(admin.ModelAdmin):
             "Basic Info",
             {
                 "classes": ("collapse", ),
-                "fields": ("name", "description", "country", "address", "price")
+                "fields": ("name", "description", "country", "city", "address", "price")
             }
         ),
         (
@@ -41,7 +41,7 @@ class RoomAdmin(admin.ModelAdmin):
             "spaces",
             {
                 "classes": ("collapse", ),
-                "fields": ("persons", "beds", "baths")
+                "fields": ("room_type", "persons", "beds", "baths")
             }
         ),
         (
