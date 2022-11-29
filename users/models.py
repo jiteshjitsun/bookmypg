@@ -16,7 +16,7 @@ user_language = (
 class User(AbstractUser):
     bio = models.TextField(default="")
     gender = models.CharField(max_length=10, choices=geneder_choices, default="male")
-    avatar = models.ImageField(null=True)
+    avatar = models.ImageField(upload_to="avatars", null=True)
     birthdate = models.DateField(null=True)
     language = models.CharField(max_length=10, choices=user_language, default="Hindi")
     superhost = models.BooleanField(default=False)
