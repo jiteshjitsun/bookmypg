@@ -14,8 +14,8 @@ class ItemAdmin(admin.ModelAdmin):
     )
 
     def used_by(self, obj):
-        return obj.rooms.count()
-        # pass
+        # return obj.count()
+        pass
 
 
 class PhotoInline(admin.TabularInline):
