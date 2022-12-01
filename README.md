@@ -34,3 +34,6 @@ In django we call it as defining models ( which can be done coding in python lan
 # Admin panel
 
 Admin panel is available for the superuser to  create, read, update and delete the data.
+
+
+** Bonus point - If a function called inside the class it is called METHOD else if outside the class it's function **

@@ -5,6 +5,7 @@ from django_countries.fields import CountryField
 
 # Create your models here.
 
+
 class AbstractItem(core_models.TimeStampedModel):
     """ abstract items """
 
@@ -21,17 +22,21 @@ class RoomType(AbstractItem):
 
     pass
 
+
 class Amenity(AbstractItem):
 
     pass
+
 
 class Facility(AbstractItem):
     """ facility model defination """
     pass
 
+
 class HouseRule(AbstractItem):
     """ House rule model """
     pass
+
 
 class Room(core_models.TimeStampedModel):
     # rooms model defination
@@ -53,7 +58,6 @@ class Room(core_models.TimeStampedModel):
     house_rules = models.ManyToManyField("HouseRule")
     facilities = models.ManyToManyField("Facility")
     
-
     def __str__(self):
         return self.name
 
@@ -65,7 +69,7 @@ class Room(core_models.TimeStampedModel):
         total_sum = sum(all_rating)
         length_of_list = len(all_rating)
 
-        if length_of_list!=0:
+        if length_of_list != 0:
             return round(total_sum/length_of_list, 2)
         return 0
     
@@ -75,8 +79,8 @@ class Photo(core_models.TimeStampedModel):
     caption = models.CharField(max_length=70)
     file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room",
-        related_name="photos",
-        on_delete=models.CASCADE)
+        related_name = "photos",
+        on_delete = models.CASCADE)
 
     def __str__(self):
         return self.caption
