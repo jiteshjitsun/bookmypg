@@ -37,3 +37,5 @@ Admin panel is available for the superuser to  create, read, update and delete t
 
 
 ** Bonus point - If a function called inside the class it is called METHOD else if outside the class it's function **
+
+- using django seed to create fake data

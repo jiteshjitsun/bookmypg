@@ -111,8 +111,12 @@ class RoomAdmin(admin.ModelAdmin):
         "^owner__username",
     )
 
+    # def save_model(self, request, obj, form, change):
+        # print(obj, change, form)
+        # super().save_model(request, obj, form, change)
+
     def count_amenities(self, obj):
-        print(obj.amenities)
+        # print(obj.amenities)
         return "Potato"
 
     def count_photos(self, obj):
