@@ -4,7 +4,6 @@ from . import models
 # Register your models here.
 @admin.register(models.User)
 class CustomerUserAdmin(UserAdmin):
-    
 
     fieldsets = UserAdmin.fieldsets + (
         (

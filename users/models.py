@@ -13,6 +13,7 @@ user_language = (
     ("English", "English"),
 )
 
+
 class User(AbstractUser):
     bio = models.TextField(default="")
     gender = models.CharField(max_length=10, choices=geneder_choices, default="male")
