@@ -38,4 +38,26 @@ Admin panel is available for the superuser to  create, read, update and delete t
 
 ** Bonus point - If a function called inside the class it is called METHOD else if outside the class it's function **
 
+# seeding in django
 - using django seed to create fake data
+
+# Paginator is awesome 
+
+- from django.core.paginator import Paginator
+
+way to use them :
+--  def all_rooms(request):
+        page = request.GET.get("page")
+        room_list = models.Room.objects.all()
+        paginator = Paginator(room_list, 10, orphans=5)
+        rooms = paginator.get_page(page)
+        # print(vars(rooms))
+        return render(
+            request,
+            "rooms/home.html",
+            {
+                "page": rooms,
+            },
+        )
+
+Here Orphan will help in moving remaining pages to the previous page ( how coool is that ), in this case it will move 5 or less items to previous page
