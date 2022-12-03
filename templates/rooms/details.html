@@ -6,4 +6,37 @@
 
 {% block content %}
 
+    <h1>{{room.name}}</h1>
+    <h2> by {{room.owner.username}}
+        {% if room.host.superhost %}
+            (superhost)
+        {% endif %}
+    </h2>
+    <h2>{{room.description}}</h2> <h3> Rs. {{room.price}}</h3>
+
+    <h3>Amenities:
+        {% for a in room.amenities.all %}
+            <ul>
+                <li>{{a}}</li>
+            </ul>
+        {% endfor %}
+        
+        <h3>Facilities:
+            {% for a in room.facilities.all %}
+                <ul>
+                    <li>{{a}}</li>
+                </ul>
+            {% endfor %}
+        </h3>
+
+        <h3>House Rules:
+            {% for a in room.house_rules.all %}
+                <ul>
+                    <li>{{a}}</li>
+                </ul>
+            {% endfor %}
+        </h3>
+        
+    </h3>
+
 {% endblock content %}

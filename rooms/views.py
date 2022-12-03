@@ -1,5 +1,7 @@
 # from math import ceil
+from django.urls import reverse
 from django.shortcuts import render, redirect
+from django.http import Http404
 # from django.core.paginator import Paginator, EmptyPage
 from . import models
 from django.views.generic import ListView
@@ -57,5 +59,10 @@ class HomeView(ListView):
 
 
 def room_detail(request, pk):
-    print(pk)
-    return render(request, "rooms/details.html")
+    try:
+        room = models.Room.objects.get(pk=pk)
+        return render(request, "rooms/details.html", {
+            "room": room,
+        })
+    except models.Room.DoesNotExist:
+        raise Http404
