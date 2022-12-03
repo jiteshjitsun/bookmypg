@@ -46,7 +46,9 @@ Admin panel is available for the superuser to  create, read, update and delete t
 - from django.core.paginator import Paginator
 
 way to use them :
---  def all_rooms(request):
+
+```python
+    def all_rooms(request):
         page = request.GET.get("page")
         room_list = models.Room.objects.all()
         paginator = Paginator(room_list, 10, orphans=5)
@@ -59,5 +61,13 @@ way to use them :
                 "page": rooms,
             },
         )
+```
 
 Here Orphan will help in moving remaining pages to the previous page ( how coool is that ), in this case it will move 5 or less items to previous page
+
+# Exception handeling 
+```python
+    try:
+    
+    catch:
+```
