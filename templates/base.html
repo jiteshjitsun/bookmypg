@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block page_name %}{% endblock page_name %}| Book My PG</title>
+    <title>{% block page_title %}{% endblock page_title %}| Book My PG</title>
 </head>
 <body>
 
-    {% include "partials/header.html" %}
+    <header>
+        {% include "partials/nav.html" %}
+        {% block search-bar %}
+            <form method="get" action="{% url "rooms:search" %}">
+                <input type="text" value="{{city}}" placeholder="search by city" name="city" id="">
+            </form>
+        {% endblock search-bar %}
+    </header>
 
-        {% block content %}{% endblock content %}
+    {% block content %}{% endblock content %}
 
     {% include "partials/footer.html" %}
 </body>

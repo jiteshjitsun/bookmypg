@@ -1,10 +1,11 @@
 # from math import ceil
-from django.urls import reverse
+# from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.http import Http404
+# from django.http import Http404
 # from django.core.paginator import Paginator, EmptyPage
 from . import models
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+from django_countries import countries
 
 # Create your views here.
 
@@ -58,11 +59,29 @@ class HomeView(ListView):
     context_object_name = "rooms"
 
 
-def room_detail(request, pk):
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/details.html", {
-            "room": room,
-        })
-    except models.Room.DoesNotExist:
-        raise Http404
+# def room_detail(request, pk):
+#     try:
+#         room = models.Room.objects.get(pk=pk)
+#         return render(request, "rooms/details.html", {
+#             "room": room,
+#         })
+#     except models.Room.DoesNotExist:
+#         raise Http404
+
+
+class RoomDetail(DetailView):
+
+    """ DetailView definition """
+
+    model = models.Room
+
+
+def search(request):
+    city = request.GET.get("city", "anywhere")
+    city = str.capitalize(city)
+    room_type = models.RoomType.objects.all()
+    return render(request, "rooms/search.html", {
+        "city": city,
+        "countries": countries,
+        "room_types": room_type,
+    })
