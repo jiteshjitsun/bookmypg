@@ -2,7 +2,7 @@
 # from django.urls import reverse
 from django.shortcuts import render, redirect
 # from django.http import Http404
-# from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, EmptyPage
 from . import models, forms
 from django.views.generic import ListView, DetailView, View
 from django_countries import countries
@@ -216,12 +216,22 @@ class SearchView(View):
                 for facility in facilities:
                     filter_args["facilities"] = facility
 
-                rooms = models.Room.objects.filter(**filter_args)
+                qs = models.Room.objects.filter(**filter_args).order_by("-created")
+
+                paginator = Paginator(qs, 10, orphans=5)
+
+                page = request.GET.get("page", 1)
+
+                rooms = paginator.get_page(page)
+
+                return render(request, "rooms/search.html", {
+                    "form": form,
+                    "rooms": rooms
+                })
 
         else:
             form = forms.SearchForm()
 
         return render(request, "rooms/search.html", {
             "form": form,
-            "rooms": rooms
         })
