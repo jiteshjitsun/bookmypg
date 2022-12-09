@@ -8,7 +8,8 @@
 
     <h3>Search!</h3>
     <form action="{% url "rooms:search" %}" method="get">
-        <div>
+        {{form.as_p}}
+        <!-- <div>
             <label for="city">city</label>
             <input type="text" value="{{city}}" name="city" placeholder="seach by city" id="city">
         
@@ -111,7 +112,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        </div>
+        </div> -->
 
         <button>Search</button>
 </form>

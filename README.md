@@ -104,3 +104,7 @@ Here Orphan will help in moving remaining pages to the previous page ( how coool
         rooms = paginator.page(1)
         return redirect("/")
 ```
+
+ # Using django forms 
+
+    
