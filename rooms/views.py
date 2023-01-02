@@ -209,7 +209,7 @@ class SearchView(View):
 
                 if superhost is True:
                     filter_args["host__superhost"] = True
-    
+
                 for amenity in amenities:
                     filter_args["amenities"] = amenity
 
