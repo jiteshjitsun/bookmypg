@@ -28,7 +28,11 @@ class LoginForm(forms.Form):
             self.add_error("email", forms.ValidationError("user does not exist"))
 
 
-class SignUpForm(forms.Form):
+class SignUpForm(forms.ModelForm):
+
+    class Meta:
+        model = models.User
+        fields = ("first_name", "last_name", "email")
 
     first_name = forms.CharField(max_length=80)
     last_name = forms.CharField(max_length=80)
@@ -53,3 +57,10 @@ class SignUpForm(forms.Form):
         else:
             return password
 
+    def save(self, *args, **kwargs):
+        user = super.save(commit=False)
+        email = self.cleaned_data("email")
+        password = self.cleaned_data("password")
+        user.username = email
+        user.set_password(password)
+        user.save()
