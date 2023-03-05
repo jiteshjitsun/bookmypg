@@ -9,6 +9,9 @@
 
 {% block content %}
     <h3>SignUp Man</h3>
+    
+    {% include 'partials/social_login.html' %}
+
     <form action="{% url "users:signup" %}" method="post">
         {{form}}
         {% csrf_token %}

@@ -16,6 +16,8 @@ class CustomerUserAdmin(UserAdmin):
                     "birthdate",
                     "language",
                     "superhost",
+                    "login_method",
+
                 )
             },
         ),
@@ -27,13 +29,18 @@ class CustomerUserAdmin(UserAdmin):
 
     list_display = (
         "username",
+        "first_name",
+        "last_name",
         "email",
-        "gender", 
-        "language", 
+        "gender",
+        "language",
         "is_active",
         "superhost",
         "is_staff",
         "is_superuser",
+        "email_verified",
+        "email_secret",
+        "login_method",
     )
     # list_filter = ("superhost",)
 
