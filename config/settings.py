@@ -38,6 +38,12 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 THIRD_PARTY_APPS = [
@@ -154,3 +160,22 @@ EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
 EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
 print(os.environ.get("MAILGUN_PASSWORD"))
 EMAIL_FROM = "bookmypg@sandbox74881bf601e64e0a8e2748c5726588ae.mailgun.org"
+
+
+SITE_ID = 2
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    # 'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = '/'
+
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "259332478208-0msvd9rjf3abghelkik14c5bd3hogvuq.apps.googleusercontent.com"
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"

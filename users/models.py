@@ -22,10 +22,23 @@ LOGIN_EMAIL = "email"
 LOGIN_GITHUB = "github"
 LOGIN_GMAIL = "google"
 
-LOGIN_CHOICES = ((LOGIN_EMAIL, "Email"), (LOGIN_GITHUB, "github"), (LOGIN_GMAIL, "google"))
+LOGIN_CHOICES = (
+    (LOGIN_EMAIL, "Email"),
+    (LOGIN_GITHUB, "github"),
+    (LOGIN_GMAIL, "google")
+)
 
 
 class User(AbstractUser):
+    LOGIN_EMAIL = "email"
+    LOGIN_GITHUB = "github"
+    LOGIN_GMAIL = "google"
+
+    LOGIN_CHOICES = (
+        (LOGIN_EMAIL, "Email"),
+        (LOGIN_GITHUB, "Github"),
+        (LOGIN_GMAIL, "Google")
+    )
     bio = models.TextField(default="")
     gender = models.CharField(max_length=10, choices=geneder_choices, default="male")
     avatar = models.ImageField(upload_to="avatars", null=True)
@@ -34,14 +47,16 @@ class User(AbstractUser):
     superhost = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
     email_secret = models.CharField(max_length=20, default="", blank=True)
-    login_method = models.CharField(max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL)
+    login_method = models.CharField(
+        max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+    )
 
     def verify_email(self):
         if self.email_verified is False:
             secret = uuid.uuid4().hex[:20]
             self.email_secret = secret
             html_message = render_to_string(
-                "emails/verify_email.html", {'secret':secret}
+                "emails/verify_email.html", {"secret": secret}
             )
             send_mail(
                 "verify BookMyPg Account",

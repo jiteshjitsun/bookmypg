@@ -23,6 +23,7 @@ urlpatterns = [
     path("rooms/", include("rooms.urls", namespace="rooms")),
     path("users/", include("users.urls", namespace="users")),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
