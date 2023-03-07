@@ -7,6 +7,7 @@ import requests
 from users import models
 from . import forms
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -49,7 +50,7 @@ def log_out(request):
 
 class SignUpView(FormView):
     template_name = "users/signup.html"
-    form_class = forms.SignUpForm
+    form_class = UserCreationForm
     success_url = reverse_lazy("core:home")
 
     def form_valid(self, form):
@@ -119,7 +120,7 @@ def github_callback(request):
                         "Accept": "application/json",
                     },
                 )
-                print(profile_request.json())
+                # print(profile_request.json())
                 profile_json = profile_request.json()
                 # print(request.json())
                 username = profile_json.get("login", None)
@@ -129,7 +130,7 @@ def github_callback(request):
                     avatar = profile_json.get("avatar_url", None)
                     bio = profile_json.get("bio")
                     try:
-                        print(f"email is {username}")
+                        # print(f"email is {username}")
                         user = models.User.objects.get(username=username)
                         if user.login_method != models.User.LOGIN_GITHUB:
                             # tryinng to login
