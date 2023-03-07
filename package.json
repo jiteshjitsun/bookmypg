@@ -1,0 +1,27 @@
+{
+  "name": "bookmypg",
+  "version": "1.0.0",
+  "description": "An app which searches nearby pg and recommend it to the College going students",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiteshjitsun/bookmypg.git"
+  },
+  "scripts": {
+    "css": "gulp"
+  },
+  "homepage": "https://github.com/jiteshjitsun/bookmypg#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^5.1.0",
+    "node-sass": "^8.0.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.8",
+    "glob-parent": "^6.0.2",
+    "postcss": "^7.0.39",
+    "sass": "^1.58.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+  }
+}
