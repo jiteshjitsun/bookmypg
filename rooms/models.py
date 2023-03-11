@@ -80,15 +80,19 @@ class Room(core_models.TimeStampedModel):
         if length_of_list != 0:
             return round(total_sum/length_of_list, 2)
         return 0
-    
+
+    def first_photo(self):
+        photo, = self.photos.all()[:1]
+        return photo.file.url
+
 
 class Photo(core_models.TimeStampedModel):
     """ phot model definition """
     caption = models.CharField(max_length=70)
     file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room",
-        related_name = "photos",
-        on_delete = models.CASCADE)
+        related_name ="photos",
+        on_delete =models.CASCADE)
 
     def __str__(self):
         return self.caption

@@ -8,15 +8,24 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <title>{% block page_title %}{% endblock page_title %}| Book My PG</title>
 </head>
-<body>
+<body class="text-gray-800 mt-32">
 
-    <header>
+    <header class="container max-w-full flex items-center justify-between px-6 h-28 border-b border-gray-400 fixed bg-yellow-300 inset-0">
+
+        <div class="flex items-center w-1/3">
+
+            <a href="{% url "core:home" %}" class="mr-6">
+                <img class="w-40" src="{% static 'img/logo.png' %}" alt="">
+            </a>
+            
+            {% block search-bar %}
+                <form method="get" action="{% url "rooms:search" %}" class="w-9/12">
+                    <input class="search-box border w-full px-5 text-lg text-gray-900 placeholder-gray-500 font-medium py-3 rounded-md shadow-md hover:shadow-lg focus:outline-none" type="text" value="{{city}}" placeholder='try "Dehradun"' name="city" id="">
+                </form>
+            {% endblock search-bar %}
+
+        </div>
         {% include "partials/nav.html" %}
-        {% block search-bar %}
-            <form method="get" action="{% url "rooms:search" %}">
-                <input type="text" value="{{city}}" placeholder="search by city" name="city" id="">
-            </form>
-        {% endblock search-bar %}
     </header>
 
     {% block content %}{% endblock content %}

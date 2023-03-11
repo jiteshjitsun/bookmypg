@@ -1,11 +1,10 @@
 
-<a href="{% url "core:home" %}">BookMyPG</a>
-<ul>
+<ul class="flex items-center text-sm font-medium h-full">
     {% if user.is_authenticated %}
-        <li><a href="{% url "users:logout" %}">Log Out</a></li>
+        <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:logout" %}">Log Out</a></li>
     {% else %}
-        <li><a href="{% url "users:login" %}">Login</a></li>
-        <li><a href="{% url "users:signup" %}">SignUp</a></li>
+        <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:login" %}">Login</a></li>
+        <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:signup" %}">SignUp</a></li>
     {% endif %}
 </ul>
 
