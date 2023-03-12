@@ -6,28 +6,35 @@
 
 {% block content %}
 
-<div class="container  ml-64 max-w-3xl bg-center ">
+<div class="container  ml-64 max-w-3xl bg-center pb-10">
     <div class="container  rounded-xl mx-auto bg-gray-800  h-50vh mt-14 mb-24 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1550918873-fa384ac606e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1468&q=80);">
         
          
     </div>
 
-        <div class="flex flex-wrap -mx-64">
+        <div class="flex flex-wrap -mx-64 mb-10">
             {% for room in rooms %}
                 {% include 'partials/room_card.html' with room=room %}
             {% endfor %}
         </div>
 
     <h3>
+
+        <div class="flex items-center justify-center mx-auto container">
         {% if page_obj.has_previous %}
-            <a href="?page={{page_obj.previous_page_number}}"> prev  </a>
+            <a href="?page={{page_obj.previous_page_number}}" class="text-black"> 
+                <i class="fa fa-light fa-arrow-left fa-lg"></i>
+            </a>
         {% endif %}
 
-        Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+        <span class="mx-3 font-medium text-lg">{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{page_obj.next_page_number}}"> nxt  </a>
+            <a href="?page={{page_obj.next_page_number}}" class="text-black">
+                <i class="fa fa-light fa-arrow-right fa-lg"></i> 
+            </a>
         {% endif %}
+        </div>
     </h3> 
 
 </div>

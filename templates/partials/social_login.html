@@ -1,7 +1,17 @@
-<a href="{% url 'users:github-login' %}">
-    continue with github
-</a>
-<br>
-<a href="/accounts/google/login">
-    continue with gmail
-</a>
+<div class="flex flex-col w-full">
+
+    <a href="{% url 'users:github-login' %}" class="w-full border-2 font-bold text-gray-500 border-gray-700 text-center rounded-sm p-3">
+        <i class="fab fa-github mr-2 fa-lg"></i> continue with github
+    </a>
+    <br>
+    <a href="/accounts/google/login" class="w-full border font-bold bg-red-500 text-white border-red-800 text-center rounded-sm p-3">
+        <i class="fab fa-google mr-2 fa-lg"></i> continue with gmail
+    </a>
+
+</div>
+<div class="flex items-center w-full my-3">
+    <div class="h-px w-full bg-gray-400"></div>
+    <span class="text-gray-600 mx-4 font-bold">or</span>
+    <div class="h-px w-full bg-gray-400"></div>
+
+</div>

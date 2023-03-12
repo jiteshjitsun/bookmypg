@@ -8,11 +8,24 @@
 {% endblock search-bar %}
 
 {% block content %}
-    <h3>Login Man</h3>
-    {% include 'partials/social_login.html' %}
-    <form action="{% url "users:login" %}" method="post">
-        {{form}}
-        {% csrf_token %}
-        <button>Login</button>
-    </form>
+    
+    <div class="container lg:border-yellow-500 lg:w-80 md:w-1/2 xl:w-1/4 my-10 mx-auto justify-center items-center flex flex-col border p-6 border-gray-400">
+
+        {% include 'partials/social_login.html' %}
+
+     
+
+        <form method="POST" action="{% url "users:login" %}" class="w-full">
+            {% csrf_token %}
+            <input type="email" placeholder="Email" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
+            <input type="password" placeholder="Password" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
+            <button class=" w-full border-2 text-center rounded-sm p-3 bg-yellow-500">Login</button>
+        </form>
+
+        <div class="mt-3">
+        <span class="mr-1">Don't have account ? </span>
+        <a href="{% url 'users:signup' %}" class="text-blue-600 font-bold">Sign Up</a>
+        </div>
+
+    </div>
 {% endblock content %}
