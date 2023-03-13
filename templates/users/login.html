@@ -17,8 +17,9 @@
 
         <form method="POST" action="{% url "users:login" %}" class="w-full">
             {% csrf_token %}
-            <input type="email" placeholder="Email" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
-            <input type="password" placeholder="Password" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
+            {{form}}
+            <!-- <input type="email" placeholder="Email" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
+            <input type="password" placeholder="Password" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id=""> -->
             <button class=" w-full border-2 text-center rounded-sm p-3 bg-yellow-500">Login</button>
         </form>
 

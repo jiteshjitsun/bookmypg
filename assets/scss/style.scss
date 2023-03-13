@@ -6,5 +6,9 @@
     transition: box-shadow .5s linear;
 }
 
-
+form {
+    input {
+        @apply mb-3;
+    }
+}
 
