@@ -7,7 +7,7 @@
 {% block content %}
 
     <h1>{{room.name}}</h1>
-    <h2> by {{room.owner.username}}
+    <h2> By <a href="{{room.owner.get_absolute_url}}">{{room.owner.username}}</a>
         {% if room.host.superhost %}
             (superhost)
         {% endif %}

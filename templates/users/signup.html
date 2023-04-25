@@ -14,8 +14,9 @@
     {% include 'partials/social_login.html' %}
 
     <form action="{% url "users:signup" %}" method="post">
-        {{form}}
+        
         {% csrf_token %}
+        {{form.as_p}}
         <button>sign Up</button>
     </form>
 

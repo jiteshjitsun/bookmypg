@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView, UpdateView
+from django.contrib.auth.views import PasswordChangeView
 import os
 import requests
 from users import models
-from . import forms
+from . import forms, models, mixins
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
 
-class LoginView(FormView):      
+class LoginView(mixins.LoggedOutOnlyView, FormView):
 
     template_name = "users/login.html"
     form_class = forms.LoginForm
@@ -25,6 +28,13 @@ class LoginView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+
+    def get_success_url(self):
+        next_arg = self.request.GET.get("next")
+        if next_arg is not None:
+            return next_arg
+        else:
+            return reverse("core:home")
 
     # def get(self, request):
     #     form = forms.LoginForm()
@@ -50,7 +60,7 @@ def log_out(request):
 
 class SignUpView(FormView):
     template_name = "users/signup.html"
-    form_class = UserCreationForm
+    form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
 
     def form_valid(self, form):
@@ -110,7 +120,7 @@ def github_callback(request):
             token_json = token_request.json()
             error = token_json.get("error", None)
             if error is not None:
-                raise GithubException()
+                raise GithubException("can't get access token")
             else:
                 access_token = token_json.get("access_token")
                 profile_request = requests.get(
@@ -134,7 +144,9 @@ def github_callback(request):
                         user = models.User.objects.get(username=username)
                         if user.login_method != models.User.LOGIN_GITHUB:
                             # tryinng to login
-                            raise GithubException()
+                            raise GithubException(
+                                f"please login with: {user.login_method}"
+                            )
                     except models.User.DoesNotExist:
                         print("sjn")
                         user = models.User.objects.create(
@@ -147,12 +159,55 @@ def github_callback(request):
                         )
                         user.set_unusable_password()
                         user.save()
-                        login(request, user)
+                    login(request, user)
+                    messages.success(
+                        request, f"Welcome back {user.first_name}"
+                    )
                     return redirect(reverse("core:home"))
                 else:
-                    raise GithubException()
+                    raise GithubException("can't get your profile")
         else:
-            raise GithubException()
-    except GithubException:
+            raise GithubException("can't get code")
+    except GithubException as e:
         # send error message
+        messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+class UserProfileView(DetailView):
+    model = models.User
+    context_object_name = "user_obj"
+
+
+class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
+    model = models.User
+    template_name = "users/update-profile.html"
+    fields = (
+        "email",
+        "first_name",
+        "last_name",
+        "bio",
+        "gender",
+        "avatar",
+        "birthdate",
+        "language",
+    )
+
+    success_message = "Profile Updated"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get("email")
+        self.object.username = email
+        self.object.save()
+        return super().form_valid(form)
+
+
+class UpdatePasswordView(mixins.EmailLoginOnlyView, mixins.LoggedInOnlyView, SuccessMessageMixin, PasswordChangeView):
+    template_name = "users/change_password.html"
+    success_message = "Password Updated"
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()

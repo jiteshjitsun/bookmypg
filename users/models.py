@@ -5,9 +5,11 @@ from django.contrib.auth .models import AbstractUser
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
-from django.contrib.auth import get_user_model
+from django.shortcuts import reverse
 
-User = get_user_model()
+# from django.contrib.auth import get_user_model
+
+
 # Create your models here.
 geneder_choices = (
     ("male", "male"),
@@ -43,7 +45,7 @@ class User(AbstractUser):
     )
     bio = models.TextField(default="")
     gender = models.CharField(max_length=10, choices=geneder_choices, default="male")
-    avatar = models.ImageField(upload_to="avatars", null=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     birthdate = models.DateField(null=True)
     language = models.CharField(max_length=10, choices=user_language, default="Hindi")
     superhost = models.BooleanField(default=False)
@@ -52,6 +54,9 @@ class User(AbstractUser):
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
+
+    def get_absolute_url(self):
+        return reverse("users:Profile", kwargs={'pk': self.pk})
 
     def verify_email(self):
         if self.email_verified is False:

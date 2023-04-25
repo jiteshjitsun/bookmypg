@@ -1,6 +1,7 @@
 
 <ul class="flex items-center text-sm font-medium h-full">
     {% if user.is_authenticated %}
+        <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{{user.get_absolute_url}}">Profile</a></li>
         <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:logout" %}">Log Out</a></li>
     {% else %}
         <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:login" %}">Login</a></li>
