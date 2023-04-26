@@ -1,0 +1,8 @@
+
+{% if user.avatar %}
+<div class="{{h_and_w|default:'h-20 w-20'}} rounded-full bg-cover" style="background-image: url({{user.avatar.url}});">
+{% else %}
+    <div class="{{h_and_w|default:'h-20 w-20'}} bg-gray-700 rounded-full text-white flex justify-center items-center">
+        <span class="{{text|default:'text-3xl'}}">{{user.first_name|first}}</span>
+    </div>
+{% endif %}

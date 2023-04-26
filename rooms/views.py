@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 # from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage
 from . import models, forms
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, UpdateView
 from django_countries import countries
 
 # Create your views here.
@@ -235,3 +235,27 @@ class SearchView(View):
         return render(request, "rooms/search.html", {
             "form": form,
         })
+
+
+class EditRoomView(UpdateView):
+
+    model = models.Room
+    template_name = "rooms/room_edit.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "persons",
+        "beds",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "house_rules",
+        "facilities",
+    )

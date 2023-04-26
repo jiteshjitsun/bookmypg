@@ -58,7 +58,7 @@ class Room(core_models.TimeStampedModel):
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
     facilities = models.ManyToManyField("Facility", related_name="roms", blank=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -84,6 +84,17 @@ class Room(core_models.TimeStampedModel):
     def first_photo(self):
         photo, = self.photos.all()[:1]
         return photo.file.url
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        print(photos)
+        return photos
+
+    def get_beds(self):
+        if self.beds == 1:
+            return "1 Bed"
+        else:
+            return f"{self.beds} beds"
 
 
 class Photo(core_models.TimeStampedModel):
