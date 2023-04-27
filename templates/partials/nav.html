@@ -1,6 +1,15 @@
 
 <ul class="flex items-center text-sm font-medium h-full">
     {% if user.is_authenticated %}
+        <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center">
+            <a class="py-10 px-3" href="{% url 'users:switch-hosting' %}">
+                {% if request.session.is_hosting %}
+                    stop hosting
+                {% else %}
+                    start hosting
+                {% endif %}
+            </a>
+        </li>
         <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{{user.get_absolute_url}}">Profile</a></li>
         <li class="ml-5 border-b-2 border-white hover:border-gray-600 h-full flex items-center"><a class="py-10 px-3" href="{% url "users:logout" %}">Log Out</a></li>
     {% else %}

@@ -44,6 +44,24 @@
                     <li class="mb-2">{{rule}}</li>
                 {% endfor %}
             </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                
+                <div>
+                    <h4 class="font-medium text-lg mt-5 mb-5">Amenities</h4>
+                    {% for amenity in room.amenities.all %}
+                        <li>{{amenity}}</li>
+                    {% endfor %}
+                </div>
+                <div>
+                    <h4 class="font-medium text-lg mt-5 mb-5">Facilities</h4>
+                    {% for facility in room.facilities.all %}
+                        <li>{{facility}}</li>
+                    {% endfor %}
+                </div>
+                
+            </div>
+
             <div class="mt-10">
                 <h4 class="font-medium text-2xl mb-5">Reviews</h4>
                 <div class="flex items-center">
@@ -57,6 +75,9 @@
                         <span>review{{room.reviews.count|pluralize}}</span>
                     </div>
                 </div>
+
+                
+
                 <div class="mt-10">
                     {% for review in room.reviews.all %}
                         <div class="border-t-2 mt-5">
