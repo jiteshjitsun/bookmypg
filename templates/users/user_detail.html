@@ -40,15 +40,16 @@
         </div>
 
         {% if user_obj.rooms.count > 0 %}
+        hello
         <div class="container max-auto pb-10 flex flex-col items-center">
             <h3 class="mb-12 text-2xl">{{user_obj.first_name}}'s Room</h3>
             <div class="flex flex-wrap -mx-40 mb-10">
                 {% for room in user_obj.rooms.all %}
-                    {% include 'partials/room_card.html' with room=room %}
+                    {% include 'partials/room_card.html' %}
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
+        {% endif %}
 
     </div>
 {% endblock content %}

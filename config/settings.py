@@ -178,6 +178,9 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
 
+# auth
+LOGIN_URL = "/users/login"
+
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "259332478208-0msvd9rjf3abghelkik14c5bd3hogvuq.apps.googleusercontent.com"
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"

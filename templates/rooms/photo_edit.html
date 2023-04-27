@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Update Room
+    Update Photo
 {% endblock page_title %}
 
 {% block search-bar %}
@@ -13,16 +13,13 @@
 
      
 
-        <form method="POST" action="{% url 'rooms:edit' room.pk %}" class="w-full" enctype="multipart/form-data">
+        <form method="POST" action="" class="w-full" enctype="multipart/form-data">
             {% csrf_token %}
             {{form}}
             <!-- <inpuat type="email" placeholder="Email" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id="">
             <input type="password" placeholder="Password" class="w-full border-2 border-gray-500 px-5 focus:outline-none focus:border-yellow-500 text-center rounded-sm p-3 mb-4" name="" id=""> -->
             <button class=" w-full border-2 text-center rounded-sm p-3 bg-yellow-500">Update</button>
         </form>
-            <div class="mt-5">
-                <a href="{% url 'rooms:photos' room.pk %}" class="text-blue-500 font-medium"> Edit Photos</a>
-            </div>
 
         
     </div>

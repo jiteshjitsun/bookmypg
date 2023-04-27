@@ -28,7 +28,7 @@
                     <span class="text-gray-700 font-light">{{room.city}}</span>
                 </div>
                 <a href="{{room.owner.get_absolute_url}}" class="flex flex-col items-center">
-                    {% include "partials/user_avatar.html" with user=room.owner %}
+                    <!-- {% include "partials/user_avatar.html" with user=room.owner %} -->
                     {{room.owner.first_name}}
                     
                    
@@ -62,7 +62,7 @@
                         <div class="border-t-2 mt-5">
                             <div class="mb-5 flex">
                                 <div>
-                                    {% include "partials/user_avatar.html" with user=review.user h_and_w='w-10 h-10' text='1' %}
+                                    <!-- {% include "partials/user_avatar.html" with user=review.user h_and_w='w-10 h-10' text='1' %} -->
                                 </div>
                                 <div class="flex flex-col ml-5">
                                     <span class="font-bold">{{review.user.first_name}}</span>
