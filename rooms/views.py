@@ -6,11 +6,12 @@ from django.shortcuts import render, redirect
 # from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse, reverse_lazy
+
 from . import models, forms
 from django.views.generic import ListView, DetailView, View, UpdateView, FormView
 from django_countries import countries
 from users import mixins as user_mixins
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -320,12 +321,12 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
 
 class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin,FormView):
 
-    model = models.Photo
+    # model = models.Photo
     template_name = "rooms/photo_create.html"
-    fields = (
-        "caption",
-        "file",
-    )
+    # fields = (
+    #     "caption",
+    #     "file",
+    # )
     form_class = forms.CreatePhotoForm
 
     def form_valid(self, form):
@@ -333,3 +334,18 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin,FormView):
         form.save(pk)
         messages.success(self.request, "Photo Uploaded")
         return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
+
+
+class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
+
+    template_name = "rooms/room_create.html"
+    form_class = forms.CreateRoomForm
+    print("Hello1111")
+
+    def form_valid(self, form):
+        room = form.save()
+        room.host = self.request.user
+        room.save()
+        messages.success(self.request, "Room Created")
+        print("Hello2222")
+        return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
