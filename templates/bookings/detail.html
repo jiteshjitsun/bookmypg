@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    booking {{reservation.check_in}}
+{% endblock page_title %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+    
+    <div class="container lg:border-yellow-500 my-10 mx-auto justify-center flex flex-col">
+
+        <div class="border-l border-b border-t bg-cover bg-center h-56 rounded-t-lg" style="background-image: url({{reservation.room.first_photo}});"></div>
+        
+        <div class="flex flex-col items-start border-l border-b border-t">
+
+            <div class="font-medium py-8 p-x5 w-full ">
+                {{reservation.check_in}} - {{reservation.check_out}} <span class=" ml-5 {% if reservation.status == 'pending' %} text-yellow-600 {% elif reservation.status == 'canceled' %} text-red-600 {% else %} text-blue-400 {% endif %}">{{reservation.get_status_display}}</span>
+            </div>
+    
+            <span class="text-2xl border-b p-5 mt-5 w-full">
+                {{reservation.room.name}}
+            </span>
+    
+            <div class="flex p-5  border-b w-full">
+                <div>
+                    <a href="{{room.owner.get_absolute_url}}" class="flex flex-col items-center">
+                        <!-- {% include "partials/user_avatar.html" with user=room.owner %} -->
+                        {{reservation.room.owner.first_name}}
+                    </a>
+                </div>
+                <div class="ml-5 flex flex-col">
+                    <span class="font-medium mb-5">Contact the owner</span>
+                    {% if reservation.room.owner.gender == "male" %}
+                        <a href="" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to him</a>
+                    {% else %}
+                        <a href="" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to her</a>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <div class="py-10 px-5 ">
+                {% if reservation.status == 'pending' %}
+                    <a class="w-1/2 border-2 text-center rounded-sm p-3 bg-red-600 text-white font-bold" href="">cancel Booking</a>
+                    {% if reservation.room.owner == user %}
+                        <a class="w-1/2 border-2 text-center rounded-sm p-3 bg-green-600 text-white font-bold" href="">confirm Booking</a>
+                    {% endif %}
+                {% endif %}
+                
+            </div>
+
+        </div>
+        
+    </div>
+{% endblock content %}

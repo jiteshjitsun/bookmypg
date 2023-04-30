@@ -30,8 +30,6 @@
                 <a href="{{room.owner.get_absolute_url}}" class="flex flex-col items-center">
                     <!-- {% include "partials/user_avatar.html" with user=room.owner %} -->
                     {{room.owner.first_name}}
-                    
-                   
                 </a>
             </div>
             <div class="flex mb-5">
@@ -124,7 +122,7 @@
                                         {% elif is_booked_bool %}
                                             <span class="class rounded bg-gray-200 w-full text-center p-1 text-gray-400 line-through">{{day}}</span>
                                         {% else %}
-                                            <span class="bg-gray-200 w-full text-center rounded text-yellow-700 p-1 hover:bg-yellow-300 hover:text-black cursor-pointer">{{day}}</span>
+                                            <a href="{% url 'bookings:create' room.pk day.year day.month day.number %}" class="bg-gray-200 w-full text-center rounded text-yellow-700 p-1 hover:bg-yellow-300 hover:text-black cursor-pointer">{{day}}</a>
                                         {% endif %}
                                     {% else %}
                                         <span></span>
