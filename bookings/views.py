@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render, reverse
 from django.contrib import messages
 from django.views.generic import View
 from django.http import Http404
+from reviews import forms as review_forms
 # Create your views here.
 
 
@@ -35,9 +36,25 @@ class ReservationDetailView(View):
 
     def get(self, *args, **kwargs):
         pk = kwargs.get("pk")
-        resevation = models.Reservation.objects.get_or_none(pk=pk)
-        if not resevation:
+        reservation = models.Reservation.objects.get_or_none(pk=pk)
+        if not reservation:
             raise Http404()
-        if resevation.guest != self.request.user and resevation.room.owner != self.request.user:
+        if reservation.guest != self.request.user and reservation.room.owner != self.request.user:
             raise Http404()
-        return render(self.request, "bookings/detail.html", {'reservation': resevation})
+        
+        form = review_forms.CreateReviewForm
+        return render(self.request, "bookings/detail.html", {'reservation': reservation, 'form':form})
+
+
+def edit_reservation(request, pk, verb):
+    reservation = models.Reservation.objects.get_or_none(pk=pk)
+    if not reservation or (reservation.guest != request.user and reservation.room.owner != request.user):
+        raise Http404()
+    if verb == "confirm":
+        reservation.status = models.Reservation.STATUS_CONFIRMED
+    elif verb == "cancel":
+        reservation.status = models.Reservation.STATUS_CANCELLED
+        models.BookedDay.objects.filter(reservation=reservation).delete()
+    reservation.save()
+    messages.success(request, "Reservation Update")
+    return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
