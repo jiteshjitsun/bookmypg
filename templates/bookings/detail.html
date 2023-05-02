@@ -51,6 +51,7 @@
                         <button class="mt-10">Submit Review</button>
                     </form>
                 {% else %} 
+                    {{reservation.status}}
                         {% if reservation.status == 'pending' %}
                             <a class="w-1/2 border-2 text-center rounded-sm p-3 bg-red-600 text-white font-bold" href="{% url 'reservations:edit' reservation.pk 'cancel' %}">cancel Booking</a>
                             {% if reservation.room.owner == user  %}

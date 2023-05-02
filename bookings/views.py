@@ -41,8 +41,8 @@ class ReservationDetailView(View):
             raise Http404()
         if reservation.guest != self.request.user and reservation.room.owner != self.request.user:
             raise Http404()
-        
-        form = review_forms.CreateReviewForm
+
+        form = review_forms.CreateReviewForm()
         return render(self.request, "bookings/detail.html", {'reservation': reservation, 'form':form})
 
 
