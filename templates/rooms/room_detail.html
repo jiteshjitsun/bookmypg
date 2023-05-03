@@ -122,7 +122,11 @@
                                         {% elif is_booked_bool %}
                                             <span class="class rounded bg-gray-200 w-full text-center p-1 text-gray-400 line-through">{{day}}</span>
                                         {% else %}
-                                            <a href="{% url 'bookings:create' room.pk day.year day.month day.number %}" class="bg-gray-200 w-full text-center rounded text-yellow-700 p-1 hover:bg-yellow-300 hover:text-black cursor-pointer">{{day}}</a>
+                                            {% if user.is_authenticated %}
+                                                <a href="{% url 'bookings:create' room.pk day.year day.month day.number %}" class="bg-gray-200 w-full text-center rounded text-yellow-700 p-1 hover:bg-yellow-300 hover:text-black cursor-pointer">{{day}}</a>
+                                            {% else %}
+                                                <a href="{% url 'users:login' %}" class="bg-gray-200 w-full text-center rounded text-yellow-700 p-1 hover:bg-yellow-300 hover:text-black cursor-pointer">{{day}}</a>
+                                            {% endif %}
                                         {% endif %}
                                     {% else %}
                                         <span></span>
