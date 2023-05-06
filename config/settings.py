@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-print(os.path.join(BASE_DIR, "uploads"))
+# print(os.path.join(BASE_DIR, "uploads"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -184,3 +184,7 @@ LOGIN_URL = "/users/login"
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "259332478208-0msvd9rjf3abghelkik14c5bd3hogvuq.apps.googleusercontent.com"
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
+
+# locale
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"), )
