@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load bool_toggle %}
+
+{% block page_title %}
+    conversation
+{% endblock page_title %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+
+{% block content %}
+
+    
+        
+
+
+        <!-- from here -->
+        
+                <!-- component -->
+        <!-- This is an example component -->
+        <div class="container mx-auto shadow-lg rounded-lg">
+            <!-- headaer -->
+        
+        <!-- end header -->
+        <!-- Chatting -->
+        <div class="flex flex-row justify-between bg-white">
+        <!-- chat list -->
+        <div class="flex flex-col w-2/5 border-r-2 overflow-y-auto">
+            <!-- search compt -->
+            <div class="border-b-2 py-4 px-2">
+            <input
+                type="text"
+                placeholder="search chatting"
+                class="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
+            />
+            </div>
+            <!-- end search compt -->
+            <!-- user list -->
+            <div
+            class="flex flex-row py-4 px-2 justify-center items-center border-b-2"
+            >
+            {% for user in conversation.participants.all %}
+                <span class="mr-2 ml-2 text-2xl font-bold">{{user.first_name}} {{user.last_name}}
+                {% if forloop.first %}
+                    &
+                {% endif %}
+                </span>
+            {% endfor %}
+            </div>
+            <!-- end user list -->
+        </div>
+        <!-- end chat list -->
+        <!-- message -->
+        <div class="w-full px-5 flex flex-col justify-between">
+            <div class="flex flex-col mt-5">
+                {% with True as flag %}
+                    {% for message in conversation.messages.all %}
+                    
+                        {% if flag %}
+                            <div class="flex justify-start text-gray-400 font-mono text-xs mb-2">
+                                {{message.user}}
+                            </div>
+                            
+                            <div class="flex justify-start mb-4">
+                                <img
+                                src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                                class="object-cover h-8 w-8 rounded-full"
+                                alt=""
+                                />
+                                <div
+                                class="ml-2 py-3 px-4 bg-green-600 font-semibold rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
+                                >
+                                {{message.message}}
+                                </div>
+                            </div>
+                            {% update_variable False as flag %}
+                        {% else %}
+                            <div class="flex justify-end text-gray-400 font-mono text-xs mb-2">
+                                {{message.user}}
+                            </div>
+                            <div class="flex justify-end mb-4">
+                                
+                               
+
+                                <div
+                                class="mr-2 py-3 px-4 bg-blue-600 font-semibold rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
+                                >
+                                {{message.message}}
+                                </div>
+                                <img
+                                src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                                class="object-cover h-8 w-8 rounded-full"
+                                alt=""
+                                />
+                            </div>
+                            {% update_variable True as flag %}
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+                <div class="py-5">
+                    <input
+                      class="w-full bg-gray-300 py-5 px-3 rounded-xl"
+                      type="text"
+                      placeholder="type your message here..."
+                    />
+                </div>
+        <!-- end message -->
+            </div>
+        </div>
+        </div>
+
+
+{% endblock content %}

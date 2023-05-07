@@ -33,9 +33,9 @@
                 <div class="ml-5 flex flex-col">
                     <span class="font-medium mb-5">Contact the owner</span>
                     {% if reservation.room.owner.gender == "male" %}
-                        <a href="" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to him</a>
+                        <a href="{% url 'conversations:go' reservation.room.owner.pk reservation.guest.pk %}" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to him</a>
                     {% else %}
-                        <a href="" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to her</a>
+                        <a href="{% url 'conversations:go' reservation.room.owner.pk reservation.guest.pk %}" class="w-full border-2 text-center rounded-sm p-3 bg-blue-500 font-bold">Talk to her</a>
                     {% endif %}
                 </div>
             </div>
