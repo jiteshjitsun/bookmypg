@@ -99,11 +99,15 @@
                     {% endfor %}
                 {% endwith %}
                 <div class="py-5">
-                    <input
-                      class="w-full bg-gray-300 py-5 px-3 rounded-xl"
-                      type="text"
-                      placeholder="type your message here..."
-                    />
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="flex">
+                            <input type="text" class="w-full bg-gray-300 py-5 px-3 rounded-xl " placeholder="write a message" name="message" id="">
+                            <button class="mr-2 py-3 px-4 bg-gray-600 ml-4 font-semibold rounded-bl-3xl rounded-tl-3xl rounded-xl text-white">Send</button>
+                        </div>
+                    </form>
+                    
                 </div>
         <!-- end message -->
             </div>
