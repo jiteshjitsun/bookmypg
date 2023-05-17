@@ -1,6 +1,7 @@
 from django.db import models
 from core import models as core_models
 from django.urls import reverse
+from reviews import models as rev
 from users import models as user_models
 from django_countries.fields import CountryField
 from cal import Calendar
@@ -15,8 +16,8 @@ class AbstractItem(core_models.TimeStampedModel):
     name = models.CharField(max_length=80)
 
     class Meta:
-        abstract = True 
-    
+        abstract = True
+
     def __str__(self):
         return self.name
 
@@ -78,7 +79,7 @@ class Room(core_models.TimeStampedModel):
             all_rating.append(review.rating_average())
         total_sum = sum(all_rating)
         length_of_list = len(all_rating)
-
+        a = round(total_sum/length_of_list, 2)
         if length_of_list != 0:
             return round(total_sum/length_of_list, 2)
         return 0

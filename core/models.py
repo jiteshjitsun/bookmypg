@@ -6,7 +6,7 @@ from . import managers
 
 class TimeStampedModel(models.Model):  # we don't want this in our database
 
-    # common stuff comes here 
+    # common stuff comes here
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     objects = managers.CustomModelManager()
@@ -15,5 +15,3 @@ class TimeStampedModel(models.Model):  # we don't want this in our database
     class Meta:
 
         abstract = True  # abstract model is a model that doesn't go to database 
-
-    

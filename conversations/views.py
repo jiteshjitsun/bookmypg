@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from users import models as user_model
 from django.views.generic import View
-from . import models, forms
+from . import models
 from django.db.models import Q
 from django.http import Http404
 

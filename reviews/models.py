@@ -2,6 +2,7 @@ from django.db import models
 from core import models as core_models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+
 # Create your models here.
 class Review(core_models.TimeStampedModel):
     """ Review model Definition """
@@ -15,7 +16,7 @@ class Review(core_models.TimeStampedModel):
     user = models.ForeignKey("users.User",
         related_name = "reviews",
         on_delete=models.CASCADE)
-    room = models.ForeignKey("rooms.Room", 
+    room = models.ForeignKey("rooms.Room",
         related_name = "reviews",
         on_delete=models.CASCADE)
 
@@ -26,8 +27,8 @@ class Review(core_models.TimeStampedModel):
         avg = (
             self.accuracy +
             self.cleanliness +
-            self.communication + 
-            self.location + 
+            self.communication +
+            self.location +
             self.value
         ) / 5
 

@@ -40,8 +40,10 @@
             <div
             class="flex flex-row py-4 px-2 justify-center items-center border-b-2"
             >
+            
             {% for user in conversation.participants.all %}
                 <span class="mr-2 ml-2 text-2xl font-bold">{{user.first_name}} {{user.last_name}}
+                    {{conversation.user_one}}
                 {% if forloop.first %}
                     &
                 {% endif %}
@@ -57,7 +59,7 @@
                 {% with True as flag %}
                     {% for message in conversation.messages.all %}
                     
-                        {% if flag %}
+                        {% if message.user.pk != user.pk %}
                             <div class="flex justify-start text-gray-400 font-mono text-xs mb-2">
                                 {{message.user}}
                             </div>
@@ -74,15 +76,11 @@
                                 {{message.message}}
                                 </div>
                             </div>
-                            {% update_variable False as flag %}
                         {% else %}
                             <div class="flex justify-end text-gray-400 font-mono text-xs mb-2">
                                 {{message.user}}
                             </div>
                             <div class="flex justify-end mb-4">
-                                
-                               
-
                                 <div
                                 class="mr-2 py-3 px-4 bg-blue-600 font-semibold rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
                                 >
@@ -94,7 +92,6 @@
                                 alt=""
                                 />
                             </div>
-                            {% update_variable True as flag %}
                         {% endif %}
                     {% endfor %}
                 {% endwith %}

@@ -96,13 +96,14 @@
         </div>
         <div class="w-1/3">
             <div class="flex">
-                {% on_favs room as on_favs_boolean %}
-                {% if on_favs_boolean %}
-                    <a href="{% url "lists:toggle-room" room.pk %}?action=remove" class="my-5 text-red-800" title="Remove from Favouriates">
-                        <i class="fas fa-sharp fa-solid fa-heart-broken fa-3x">   </i>
-                    </a>
-                {% else %}
-                    {% if user.is_authenticated %}
+                {% if user.is_authenticated %}
+                    {% on_favs room as on_favs_boolean %}
+                    {% if on_favs_boolean %}
+                        <a href="{% url "lists:toggle-room" room.pk %}?action=remove" class="my-5 text-red-800" title="Remove from Favouriates">
+                            <i class="fas fa-sharp fa-solid fa-heart-broken fa-3x">   </i>
+                        </a>
+                    {% else %}
+                    
                         <a href="{% url "lists:toggle-room" room.pk %}?action=add" class="my-5 hover:text-yellow-400 text-red-800" title="Add to Favouriates">
                             <i class="fas fa-sharp fa-solid fa-heart fa-3x">   </i>
                         </a>
